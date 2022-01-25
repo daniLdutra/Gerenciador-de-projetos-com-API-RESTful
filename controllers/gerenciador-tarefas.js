@@ -30,6 +30,16 @@ function listarTarefas(req, res) {
         0
     );
   }
+  //ordenar
+  if (ordenar === 'ASC') {
+    tarefasRetornar.sort((t1, t2) =>
+      t1.nome.toLocaleLowerCase() > t2.nome.toLocaleLowerCase() ? 1 : -1
+    );
+  } else if (ordenar === 'DESC') {
+    tarefasRetornar.sort((t1, t2) =>
+      t1.nome.toLocaleLowerCase() < t2.nome.toLocaleLowerCase() ? 1 : -1
+    );
+  }
 }
 
 module.exports = {
