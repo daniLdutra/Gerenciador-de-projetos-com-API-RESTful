@@ -40,6 +40,14 @@ function listarTarefas(req, res) {
       t1.nome.toLocaleLowerCase() < t2.nome.toLocaleLowerCase() ? 1 : -1
     );
   }
+  //retornar
+  res.json({
+    totalItens: tarefasRetornar.length,
+    tarefas: tarefasRetornar
+      .slice(0)
+      .splice((pagina - 1) * itensPorPagina, itensPorPagina),
+    pagina: pagina,
+  });
 }
 
 module.exports = {
