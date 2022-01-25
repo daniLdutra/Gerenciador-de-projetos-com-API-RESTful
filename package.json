@@ -4,6 +4,7 @@
   "description": "API RestFul",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Daniella de Lima Dutra",
@@ -12,6 +13,7 @@
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "nodemon": "^2.0.15",
     "uuid": "^8.3.2"
   }
 }

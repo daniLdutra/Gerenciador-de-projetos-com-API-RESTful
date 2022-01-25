@@ -1,3 +1,4 @@
+const { ListGroup } = require('react-bootstrap');
 const { v4 } = require('uuid');
 
 let tarefas = [
@@ -18,16 +19,14 @@ function listarTarefaId(req, res) {
 
 function listarTarefas(req, res) {
   const pagina = req.query['pag'] || 1;
-  const ordem = req.query['ordem']; //ASC, DESC
+  const ordenar = req.query['ordem']; //ASC, DESC
   const filtroTarefa = req.query['filtro-tarefa'];
   const itensPorPagina = req.query['itens-por-pagina'] || 3;
   let tarefasRetornar = tarefas.slice(0);
   //filtrar
   if (tarefasRetornar) {
     tarefasRetornar = tarefasRetornar.filter(
-      (t) =>
-        t.nome.toLocaleLowerCase().indexOf(filtroTarefa.toLocaleLowerCase()) ===
-        0
+      (t) => t.nome.toLowerCase().indexOf(filtroTarefa.toLowerCase()) === 0
     );
   }
   //ordenar
