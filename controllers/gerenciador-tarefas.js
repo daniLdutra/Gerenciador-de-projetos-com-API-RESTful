@@ -1,5 +1,5 @@
 const { ListGroup } = require('react-bootstrap');
-const { v4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 let tarefas = [
   { id: '1', nome: 'Aprender React', concluida: true },
@@ -25,7 +25,7 @@ function listarTarefas(req, res) {
   let tarefasRetornar = tarefas.slice(0);
 
   //filtrar
-  if (tarefasRetornar) {
+  if (filtroTarefa) {
     tarefasRetornar = tarefasRetornar.filter(
       (t) => t.nome.toLowerCase().indexOf(filtroTarefa.toLowerCase()) === 0
     );
@@ -50,7 +50,21 @@ function listarTarefas(req, res) {
   });
 }
 
+function cadastrarTarefa(req, res) {
+  if (!req.body['nome'] && !req.body['concluida']) {
+    res.status(400).json({ erro: 'Requisição inválida.' });
+  }
+  const tarefa = {
+    id: uuidv4(),
+    nome: req.body['nome'],
+    concluida: req.body['concluida'],
+  };
+  tarefas.push(tarefa);
+  res.json(tarefa);
+}
+
 module.exports = {
   listarTarefaId,
   listarTarefas,
+  cadastrarTarefa,
 };
