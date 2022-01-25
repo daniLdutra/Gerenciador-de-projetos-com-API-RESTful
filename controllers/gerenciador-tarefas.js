@@ -23,6 +23,7 @@ function listarTarefas(req, res) {
   const filtroTarefa = req.query['filtro-tarefa'];
   const itensPorPagina = req.query['itens-por-pagina'] || 3;
   let tarefasRetornar = tarefas.slice(0);
+
   //filtrar
   if (tarefasRetornar) {
     tarefasRetornar = tarefasRetornar.filter(
@@ -32,14 +33,14 @@ function listarTarefas(req, res) {
   //ordenar
   if (ordenar === 'ASC') {
     tarefasRetornar.sort((t1, t2) =>
-      t1.nome.toLocaleLowerCase() > t2.nome.toLocaleLowerCase() ? 1 : -1
+      t1.nome.toLowerCase() > t2.nome.toLowerCase() ? 1 : -1
     );
   } else if (ordenar === 'DESC') {
     tarefasRetornar.sort((t1, t2) =>
-      t1.nome.toLocaleLowerCase() < t2.nome.toLocaleLowerCase() ? 1 : -1
+      t1.nome.toLowerCase() < t2.nome.toLowerCase() ? 1 : -1
     );
   }
-  //retornar
+
   res.json({
     totalItens: tarefasRetornar.length,
     tarefas: tarefasRetornar
