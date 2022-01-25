@@ -98,10 +98,26 @@ function removerTarefa(req, res) {
   return res.status(200).json({ msg: 'Tarefa removida com sucesso!' });
 }
 
+function concluirTarefa(req, res) {
+  const id = req.params.id;
+  let tarefaConcluida = false;
+  tarefas = tarefas.map((tarefa) => {
+    if (tarefa.id === id) {
+      (tarefa.concluida = true), (tarefaConcluida = true);
+    }
+    return tarefa;
+  });
+  if (!tarefaConcluida) {
+    res.status(404).json({ erro: 'Tarefa não encontra.' });
+  }
+  res.json({ msg: 'Tarefa concluida com sucesso!' });
+}
+
 module.exports = {
   listarTarefaId,
   listarTarefas,
   cadastrarTarefa,
   atualizarTarefa,
   removerTarefa,
+  concluirTarefa,
 };
