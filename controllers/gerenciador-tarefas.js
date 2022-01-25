@@ -63,8 +63,33 @@ function cadastrarTarefa(req, res) {
   res.json(tarefa);
 }
 
+function atualizarTarefa(req, res) {
+  if (!req.body['nome'] && !req.body['concluida']) {
+    res.status(400).json({ erro: 'Requisição inválida.' });
+  }
+  const id = req.params.id;
+  let tarefaAtualizada = false;
+  tarefas = tarefas.map((tarefa) => {
+    if (tarefa.id === id) {
+      (tarefa.nome = req.body['nome']),
+        (tarefa.concluida = req.body['concluida']);
+      tarefaAtualizada = true;
+    }
+    return tarefa;
+  });
+  if (!tarefaAtualizada) {
+    res.status(404).json({ erro: 'Tarefa não encontrada.' });
+  }
+  res.json({
+    id: id,
+    nome: req.body['nome'],
+    concluida: req.body['concluida'],
+  });
+}
+
 module.exports = {
   listarTarefaId,
   listarTarefas,
   cadastrarTarefa,
+  atualizarTarefa,
 };
