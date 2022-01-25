@@ -21,6 +21,15 @@ function listarTarefas(req, res) {
   const ordem = req.query['ordem']; //ASC, DESC
   const filtroTarefa = req.query['filtro-tarefa'];
   const itensPorPagina = req.query['itens-por-pagina'] || 3;
+  let tarefasRetornar = tarefas.slice(0);
+  //filtrar
+  if (tarefasRetornar) {
+    tarefasRetornar = tarefasRetornar.filter(
+      (t) =>
+        t.nome.toLocaleLowerCase().indexOf(filtroTarefa.toLocaleLowerCase()) ===
+        0
+    );
+  }
 }
 
 module.exports = {
